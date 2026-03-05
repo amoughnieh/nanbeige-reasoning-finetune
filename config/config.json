@@ -1,0 +1,63 @@
+{
+  "global": {
+    "base_model_path": "YOUR_BASE_MODEL_PATH",
+    "data_dir": "YOUR_DATASET_PATH",
+    "system_prompt": "You are an expert electrical engineer. Answer technical questions accurately and in depth."
+  },
+  "curation": {
+    "output_dir": "data",
+    "min_upvotes": 5,
+    "max_downvote_ratio": 0.3,
+    "min_length": 300
+  },
+  "enrichment": {
+    "input_csv": "data/curated_pairs.csv",
+    "output_jsonl": "data/enriched_pairs.jsonl",
+    "processed_ids_file": "data/processed_ids.txt",
+    "model": "qwen-mt-flash",
+    "api_base_url": "https://dashscope-intl.aliyuncs.com/compatible-mode/v1",
+    "delay": 1.0
+  },
+  "trace_generation": {
+    "input_jsonl": "data/enriched_pairs.jsonl",
+    "output_jsonl": "data/enriched_pairs_with_re_traces.jsonl",
+    "model": "qwen-mt-flash",
+    "api_base_url": "https://dashscope-intl.aliyuncs.com/compatible-mode/v1",
+    "max_tokens": 5000,
+    "delay": 1.5
+  },
+  "splits": {
+    "input_jsonl": "data/enriched_pairs_with_re_traces.jsonl",
+    "train_file": "data/data_train.jsonl",
+    "eval_file": "data/data_eval.jsonl",
+    "eval_size": 10,
+    "seed": 42
+  },
+  "training": {
+    "train_data": "data/data_train.jsonl",
+    "eval_data": "data/data_eval.jsonl",
+    "output_dir": "lora_adapter_rxx",
+    "drop_thinking_prob": 0.0,
+    "max_train_tokens": 7168,
+    "max_seq_length": 7168,
+    "lora_r": 16,
+    "lora_alpha": 32,
+    "lora_dropout": 0.0,
+    "epochs": 9,
+    "batch_size": 1,
+    "grad_accum": 8,
+    "lr": 0.0002,
+    "warmup_ratio": 0.05,
+    "lr_scheduler_type": "cosine"
+  },
+  "merge": {
+    "output_dir": "output/temp_llm",
+    "quantization": "Q6_K",
+    "max_seq_length": 2048
+  },
+  "evaluation": {
+    "eval_jsonl": "data/data_eval.jsonl",
+    "model_path": "output/temp_llm/model-Q6_K.gguf",
+    "output_md": "eval_results.md"
+  }
+}
