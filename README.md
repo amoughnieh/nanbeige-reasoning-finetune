@@ -1,4 +1,4 @@
-# Nanbeige-EE: Reasoning-Based Fine-Tuning Pipeline
+# Reasoning-Based Fine-Tuning Pipeline
 
 A pipeline to fine-tune the nanbeige4.1-3B model using electrical engineering data. The main purpose of the project is to significantly reduce thinking traces and produce more concise answers. It uses Unsloth for faster training.
 
