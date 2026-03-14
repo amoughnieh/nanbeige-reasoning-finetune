@@ -83,6 +83,16 @@ python 6_merge_and_convert.py --adapter_path lora_adapter_r01
 ```
 python 7_run_evaluation.py
 ```
+### Phase 4: Benchmarking
+```
+python 8_run_benchmarks.py --benchmark gsm8k --max_items 50
+```
+```
+python 8_run_benchmarks.py --benchmark mmlu_ee --max_items 50
+```
+```
+python 8_run_benchmarks.py --benchmark ee_qa --max_items 50 --eval_jsonl data/ee_qa_eval.jsonl --model gemini-2.5-pro
+```
 ---
 
 ## References
