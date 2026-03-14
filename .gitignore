@@ -7,6 +7,7 @@ ENV/
 
 
 data/
+benchmarks/
 unsloth_compiled_cache/
 convert_hf_to_gguf.py
 

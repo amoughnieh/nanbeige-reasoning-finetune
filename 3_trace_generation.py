@@ -106,8 +106,7 @@ def run_re_pipeline(args, client, tokenizer):
                 response = client.chat.completions.create(
                     model=args.model,
                     messages=[{"role": "user", "content": prompt}],
-                    max_tokens=args.max_tokens,
-                    extra_body={"enable_thinking": False}
+                    max_tokens=args.max_tokens
                 )
 
                 trace = response.choices[0].message.content.strip()
