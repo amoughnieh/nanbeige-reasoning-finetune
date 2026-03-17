@@ -30,7 +30,7 @@ This project utilizes the Stack Exchange Data Dump. Because Stack Exchange requi
 4. Data Splitting: Splits data into training and evaluation sets.
 5. Fine-Tuning: LoRA training using Unsloth.
 6. Merge & Convert: Merges the adapter to the base model and quantizes it.
-7. Evaluation: Tests the model locally by comparing its predicted reasoning traces and answers against the reference data.
+7. Benchmarking: Compares base and fine-tuned models on GSM8K, MMLU Electrical Engineering, and held-out EE Q&A pairs using exact-match accuracy and LLM-as-judge evaluation.
 
 ---
 
@@ -76,22 +76,19 @@ python 4_create_splits.py
 python 5_run_training.py
 ```
 
-### Phase 3: Merge and Evaluation
+### Phase 3: Merge
 ```
 python 6_merge_and_convert.py --adapter_path lora_adapter_r01
 ```
-```
-python 7_run_evaluation.py
-```
 ### Phase 4: Benchmarking
 ```
-python 8_run_benchmarks.py --benchmark gsm8k --max_items 50
+python 7_run_benchmarks.py --benchmark gsm8k --max_items 50
 ```
 ```
-python 8_run_benchmarks.py --benchmark mmlu_ee --max_items 50
+python 7_run_benchmarks.py --benchmark mmlu_ee --max_items 50
 ```
 ```
-python 8_run_benchmarks.py --benchmark ee_qa --max_items 50 --eval_jsonl data/ee_qa_eval.jsonl --model gemini-2.5-pro
+python 7_run_benchmarks.py --benchmark ee_qa --max_items 50 --eval_jsonl data/ee_qa_eval.jsonl --model gemini-2.5-pro
 ```
 ---
 
@@ -99,6 +96,8 @@ python 8_run_benchmarks.py --benchmark ee_qa --max_items 50 --eval_jsonl data/ee
 
 * Base Model: [Nanbeige 4.1 3B](https://huggingface.co/Nanbeige/Nanbeige4.1-3B)
 * Research Paper: [Nanbeige 4.1: Paper](https://arxiv.org/abs/2602.13367)
+* Model & GGUF: [Huggingface](https://huggingface.co/amoughnieh/Nanbeige4.1-3B-EE-Reasoning-SFT)
+
 ---
 
 ## Important Notes
